@@ -11,7 +11,11 @@ def pepxml_ranks(input_dir: Path, mzml: Path) -> list[tuple[int, Path]]:
     stem = mzml.stem
     matches = []
     for path in input_dir.iterdir():
-        if not path.is_file() or not path.name.startswith(stem) or not path.name.endswith(".pepXML"):
+        if (
+            not path.is_file()
+            or not path.name.startswith(stem)
+            or not path.name.endswith(".pepXML")
+        ):
             continue
         suffix = path.name[len(stem) :]
         if suffix == ".pepXML":
@@ -32,10 +36,12 @@ def pepxml_ranks(input_dir: Path, mzml: Path) -> list[tuple[int, Path]]:
 
 
 def text(value: object) -> str:
+    """Decode a pyOpenMS string value into regular Python text."""
     return value.decode("utf-8") if isinstance(value, bytes) else str(value)
 
 
 def convert(mzml: Path, input_dir: Path, output: Path) -> None:
+    """Combine all ranked pepXML identifications for one mzML into idXML."""
     if not mzml.is_file():
         raise FileNotFoundError(mzml)
     ranks = pepxml_ranks(input_dir, mzml)
@@ -78,7 +84,9 @@ def convert(mzml: Path, input_dir: Path, output: Path) -> None:
         for peptide in peptides:
             old_id = text(peptide.getIdentifier())
             if old_id not in identifiers:
-                raise ValueError(f"Peptide run identifier {old_id!r} has no protein run in {pepxml}")
+                raise ValueError(
+                    f"Peptide run identifier {old_id!r} has no protein run in {pepxml}"
+                )
             peptide.setIdentifier(identifiers[old_id])
             peptide.setMetaValue("msfragger_rank", rank)
             peptide.setMetaValue("file_origin", mzml.name)
@@ -86,10 +94,14 @@ def convert(mzml: Path, input_dir: Path, output: Path) -> None:
             all_peptides.push_back(peptide)
 
     oms.IdXMLFile().store(str(output), all_proteins, all_peptides)
-    print(f"Wrote {len(all_peptides)} peptide identifications from {len(ranks)} pepXML rank file(s) to {output}")
+    print(
+        f"Wrote {len(all_peptides)} peptide identifications "
+        f"from {len(ranks)} pepXML rank file(s) to {output}"
+    )
 
 
 def main() -> None:
+    """Parse command-line arguments and run the conversion."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--mzml", required=True, type=Path)
     parser.add_argument("--input-dir", required=True, type=Path)

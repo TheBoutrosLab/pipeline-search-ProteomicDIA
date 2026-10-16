@@ -49,10 +49,6 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../flow-diagram/">Flow Diagram</a>
-                </li>
-              </ul>
-              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../pipeline-steps/">Pipeline Steps</a>
                 </li>
               </ul>
@@ -64,6 +60,10 @@
                 <li class="toctree-l1 current"><a class="reference internal current" href="./">Outputs</a>
     <ul class="current">
     </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../resources/">Resources</a>
                 </li>
               </ul>
               <ul>
@@ -102,7 +102,7 @@
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
       <li class="breadcrumb-item active">Outputs</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/a73dcba525483c8ed8b76e95e8936cf816eac575/README.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/a7515e4247f555a33847dfbfd07885b8abac25b2/README.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -111,8 +111,7 @@
             <div class="section" itemprop="articleBody">
               
                 <h2 id="outputs">Outputs</h2>
-<!-- List and describe the final output(s) of the pipeline. -->
-
+<p>Results are written under <code>&lt;output_dir&gt;/search-ProteomicDIA-0.1.0/&lt;dataset_id&gt;/</code>:</p>
 <table>
 <thead>
 <tr>
@@ -122,26 +121,37 @@
 </thead>
 <tbody>
 <tr>
-<td>ouput 1</td>
-<td>1 - 2 sentence description of the output.</td>
+<td><code>output/MSFragger/&lt;mzML basename&gt;*.pepXML</code></td>
+<td>Unfiltered MSFragger pepXML output, including all reported rank files.</td>
 </tr>
 <tr>
-<td>ouput 2</td>
-<td>1 - 2 sentence description of the output.</td>
+<td><code>output/MSFragger/&lt;mzML basename&gt;.pin</code></td>
+<td>Unfiltered MSFragger PIN file.</td>
 </tr>
 <tr>
-<td>ouput n</td>
-<td>1 - 2 sentence description of the output.</td>
+<td><code>output/MSFragger/&lt;sample_name&gt;_MSFragger.idXML</code></td>
+<td>One idXML containing the sample's pepXML ranks.</td>
+</tr>
+<tr>
+<td><code>output/MSFragger/&lt;result filename&gt;.sha512</code></td>
+<td>SHA-512 checksum for each pepXML, PIN, and idXML file; compatible with <code>sha512sum -c</code>.</td>
+</tr>
+<tr>
+<td><code>intermediate/MSFragger/fragger.params</code></td>
+<td>Generated search parameters, published only when <code>save_intermediate_files = true</code>.</td>
+</tr>
+<tr>
+<td><code>log-search-ProteomicDIA-0.1.0-&lt;timestamp&gt;/</code></td>
+<td>Nextflow reports, trace, configuration, and process logs.</td>
 </tr>
 </tbody>
 </table>
-<hr />
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../inputs/" class="btn btn-neutral float-left" title="Inputs"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../testing-and-validation/" class="btn btn-neutral float-right" title="Testing and Validation">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../resources/" class="btn btn-neutral float-right" title="Resources">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -171,7 +181,7 @@
       <span><a href="../inputs/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../testing-and-validation/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../resources/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

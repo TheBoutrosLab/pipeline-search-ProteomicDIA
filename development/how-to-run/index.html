@@ -51,10 +51,6 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../flow-diagram/">Flow Diagram</a>
-                </li>
-              </ul>
-              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../pipeline-steps/">Pipeline Steps</a>
                 </li>
               </ul>
@@ -64,6 +60,10 @@
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../outputs/">Outputs</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../resources/">Resources</a>
                 </li>
               </ul>
               <ul>
@@ -102,7 +102,7 @@
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
       <li class="breadcrumb-item active">How To Run</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/a73dcba525483c8ed8b76e95e8936cf816eac575/README.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/a7515e4247f555a33847dfbfd07885b8abac25b2/README.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -113,22 +113,26 @@
                 <h2 id="how-to-run">How To Run</h2>
 <ol>
 <li>
-<p>Update the params section of the .config file</p>
+<p>Initialize the repository's Git submodules with <code>git submodule update --init --recursive</code>. Copy <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/a7515e4247f555a33847dfbfd07885b8abac25b2/config/template.config">config/template.config</a> to a run-specific config file and set <code>dataset_id</code>, <code>input_csv</code>, <code>output_dir</code>, <code>decoy_database</code>, <code>decoy_prefix</code>, and <code>msfragger_executable</code>. Review the <code>MSFragger</code> search settings for the data and FASTA.</p>
 </li>
 <li>
-<p>Update the input yaml</p>
+<p>Create an input CSV using <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/a7515e4247f555a33847dfbfd07885b8abac25b2/input/input.csv">input/input.csv</a>. List one unfractionated mzML file per sample.</p>
 </li>
 <li>
-<p>See the submission script, <a href="https://github.com/theboutroslab/tool-submit-nf">here</a>, to submit your pipeline</p>
+<p>Obtain the MSFragger JAR separately under its license, then run the pipeline:</p>
 </li>
 </ol>
-<hr />
+<p><code>bash
+   export NXF_VER=24.10.6
+   export NXF_SYNTAX_PARSER=v1
+   nextflow run . -c my-run.config</code></p>
+<p>The template uses Docker by default. Select <code>-profile apptainer</code> or <code>-profile singularity</code> where appropriate. The <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/a7515e4247f555a33847dfbfd07885b8abac25b2/.env-template"><code>.env-template</code></a> records the Nextflow version and parser used by the shared pipeline configuration.</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../overview/" class="btn btn-neutral float-left" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../flow-diagram/" class="btn btn-neutral float-right" title="Flow Diagram">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../pipeline-steps/" class="btn btn-neutral float-right" title="Pipeline Steps">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -158,7 +162,7 @@
       <span><a href="../overview/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../flow-diagram/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../pipeline-steps/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

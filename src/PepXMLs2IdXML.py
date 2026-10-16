@@ -3,7 +3,7 @@
 import argparse
 import re
 from pathlib import Path
-import pyopenms as oms
+import pyopenms as oms  # pylint: disable=import-error
 
 
 def pepxml_ranks(input_dir: Path, mzml: Path) -> list[tuple[int, Path]]:

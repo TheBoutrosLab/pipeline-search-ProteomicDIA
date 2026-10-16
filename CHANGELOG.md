@@ -5,14 +5,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Added
-
-- SHA-512 checksum sidecars for every pepXML rank, PIN, and idXML result.
-
-### Changed
-
-- Replace node-specific template resource profiles with one allocation for each pipeline process.
-
 ## [0.1.0] - 2026-10-16
 
 ### Added
@@ -22,3 +14,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CSV input with one mzML per sample; unfiltered pepXML rank files and PIN output for each search.
 - pyOpenMS conversion of all pepXML ranks into one idXML per sample, retaining mzML origin and rank provenance.
 - UCLA NFTest integration case and a runner that retains test output and work files under `/scratch`.
+- SHA-512 checksum sidecars for every pepXML rank, PIN, and idXML result.
+

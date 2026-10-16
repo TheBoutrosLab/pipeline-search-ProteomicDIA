@@ -1,23 +1,64 @@
 #!/usr/bin/env nextflow
 
-nextflow.enable.dsl=2
+nextflow.enable.dsl = 2
 
-// Include processes and workflows here
-include { run_validate_PipeVal } from './external/pipeline-Nextflow-module/modules/PipeVal/validate/main.nf'
+include { write_MSFraggerParams } from './module/write_MSFraggerParams.nf'
+include { search_database_MSFragger } from './module/search_database_MSFragger.nf'
+include { convert_pepXML2idXML_MSFragger } from './module/convert_pepXML2idXML_MSFragger.nf'
+include { calculate_SHA512 } from './module/calculate_SHA512.nf'
 
-include { generate_standard_filename } from './external/pipeline-Nextflow-module/modules/common/generate_standardized_filename/main.nf'
-include { indexFile } from './external/pipeline-Nextflow-module/modules/common/indexFile/main.nf'
+/** Read one unfractionated mzML per sample from the input CSV. */
+def readInputMzML(String input_csv) {
+    def csv = file(input_csv)
 
-// Add this pipeline's custom modules here
-include { run_command_Tool } from './module/EXAMPLE_checksum.nf'
+    return Channel.fromPath(csv)
+        .splitCsv(header: true)
+        .toList()
+        .map { rows ->
+            if (!rows) {
+                throw new IllegalArgumentException("Input CSV has no samples: ${csv}")
+            }
 
-// include { tool_name_command_name } from './module/module-name'
+            def sample_names = [] as Set
+            def input_paths = [] as Set
+            def mzml_basenames = [] as Set
+            rows.collect { row ->
+                if (row.keySet() != (['sample_name', 'mzML'] as Set)) {
+                    throw new IllegalArgumentException('Input CSV must have exactly sample_name,mzML columns')
+                }
 
-// Log info here
+                def sample_name = row.sample_name?.trim()
+                if (!(sample_name ==~ /[A-Za-z0-9][A-Za-z0-9._-]*/)) {
+                    throw new IllegalArgumentException("Invalid sample_name: ${row.sample_name}")
+                }
+                if (!sample_names.add(sample_name)) {
+                    throw new IllegalArgumentException("Duplicate sample_name: ${sample_name}")
+                }
+
+                def raw_path = row.mzML?.trim()
+                if (!raw_path) {
+                    throw new IllegalArgumentException("Missing mzML path for ${sample_name}")
+                }
+                def mzml = file(raw_path.startsWith('/') ? raw_path : "${csv.parent}/${raw_path}")
+                if (!mzml.exists() || !mzml.name.toLowerCase().endsWith('.mzml')) {
+                    throw new IllegalArgumentException("Missing or invalid mzML for ${sample_name}: ${mzml}")
+                }
+                if (!input_paths.add(mzml.toRealPath().toString())) {
+                    throw new IllegalArgumentException("mzML file listed more than once: ${mzml}")
+                }
+                if (!mzml_basenames.add(mzml.baseName)) {
+                    throw new IllegalArgumentException("mzML basenames must be unique across samples: ${mzml.baseName}")
+                }
+
+                tuple(sample_name, mzml)
+            }
+        }
+}
+
 log.info """\
-        ======================================
-        T E M P L A T E - N F  P I P E L I N E
-        ======================================
+        =========================================================
+        P I P E L I N E   S E A R C H   P R O T E O M I C   D I A
+        =========================================================
         Boutros Lab
 
         Current Configuration:
@@ -25,97 +66,47 @@ log.info """\
             name: ${workflow.manifest.name}
             version: ${workflow.manifest.version}
 
-        - input:
-            input a: ${params.variable_name}
-            ...
+        - input CSV: ${params.input_csv}
+        - decoy_database: ${params.decoy_database}
+        - output: ${params.output_dir_base}
 
-        - output:
-            output a: ${params.output_path}
-            ...
-
-        - options:
-            option a: ${params.option_name}
-            ...
-
-        Tools Used:
-            tool a: ${params.docker_image_name}
-
-        ------------------------------------
         Starting workflow...
-        ------------------------------------
-        """
-        .stripIndent()
+        """.stripIndent()
 
-// Establish input channels here
-Channel
-    .fromList(params.samples_to_process)
-    .map { sample ->
-        return tuple(sample.id, sample.path, sample.sample_type)
-    }
-    .set { samplesToProcessChannel }
-
-Channel
-    .fromList(params.samples_to_process)
-    .map{ it -> [it['path'], indexFile(it['path'])] }
-    .flatten()
-    .set { files_to_validate_ch }
-
-// These are a few potential channels that can be mixed in
-
-/*
-Channel
-    .from(
-        params.reference,
-        params.reference_index,
-        params.reference_dict
-        )
-    .set { reference_ch }
-
-// Decription of input channel
-Channel
-    .fromPath(params.variable_name)
-    .ifEmpty { error "Cannot find: ${params.variable_name}" }
-    .set { input_ch_variable_name }
-
-files_to_validate_ch = files_to_validate_ch
-    .mix(reference_ch)
-    .mix(input_ch_variable_name)
-*/
-
-// Main workflow here
 workflow {
+    validated_samples = readInputMzML(params.input_csv)
 
+    write_MSFraggerParams(
+        validated_samples.map { params.MSFragger },
+        params.decoy_prefix,
+        file(params.decoy_database)
+    )
 
-    base_meta = Channel.value([
-        'log_output_dir': params.log_output_dir,
-        'output_dir': params.output_dir_base
-    ])
+    search_database_MSFragger(
+        validated_samples.flatMap { it },
+        file(params.decoy_database),
+        write_MSFraggerParams.out.params_file,
+        file(params.msfragger_executable)
+    )
 
-    // Validate input files
-    run_validate_PipeVal(
-        base_meta.combine(files_to_validate_ch)
-        )
+    pepxml_with_mzml = search_database_MSFragger.out.search_results
+        .join(validated_samples.flatMap { it })
+        .map { sample_name, pepxml_files, pin_file, mzml_file ->
+            tuple(sample_name, pepxml_files, mzml_file)
+        }
 
-    // Capture validation results
-    run_validate_PipeVal.out.validation_result
-        .collectFile(
-            name: 'input_validation.txt', newLine: true,
-            storeDir: "${params.output_dir_base}/validation"
-        )
+    convert_pepXML2idXML_MSFragger(pepxml_with_mzml)
 
-    // Add pipeline-specific workflow steps here
-    run_command_Tool(
-        run_validate_PipeVal.out.validated_file
-        )
-
-    /*
-    tool_name_command_name(
-        samplesToProcessChannel,
-        input_ch_variable_name
-        )
-    */
+    search_files = search_database_MSFragger.out.search_results
+        .flatMap { sample_name, pepxml_files, pin_file ->
+            def ranks = pepxml_files instanceof Collection ? pepxml_files : [pepxml_files]
+            ranks + [pin_file]
+        }
+    idxml_files = convert_pepXML2idXML_MSFragger.out.idxml
+        .map { sample_name, idxml_file -> idxml_file }
+    calculate_SHA512(search_files.mix(idxml_files))
 
     workflow.onComplete = {
-        WorkflowFinalizer.completeWorkflow(workflow, params);
+        WorkflowFinalizer.completeWorkflow(workflow, params)
     }
 }

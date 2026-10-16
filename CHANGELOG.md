@@ -1,69 +1,24 @@
 # Changelog
-All notable changes to the pipeline-name pipeline.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
-
-This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-
----
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-### Added
-- Add external `indexFile`
-- Add `sample_id` extraction from BAM
-- Add template input YAMLs
-- Add `pipeline-Nexflow-config` as submodule and redirect `set_resources_allocation`
-- Add `pipeline-Nextflow-module` as submodule
-- Additional out of memory exit code
-- Pipeline release action
-- Template for NFTest testing results in PR template
-- Enable dependabot
-- Add example PlantUML image to README
-- Add workflow to build documentation
-- Add workflows to run Nextflow configuration tests
-- Add `CODEOWNERS` set to `nextflow-wg`
-- Add standard workflows for documentation and tests
-- Add schema example with custom types
-### Changed
-- Switch resource limit checks to external scripts
-- Update links in on-prem `Confluence` to point to cloud-based `Confluence`
-- Fix `CODEOWNERS` file
-- Use `schema.check_path` for `workDir` validation
-- Add `Discussions` and `Contributors` to the Table of Contents in `README.md`
-- Update from DSL1 to DSL2
-- Standardize config structure
-- Restructure repo so main script is `main.nf`
-- Reorganize contributors and metadata
-- Reorganize PR template so description is at top
-- Update automatic node detection to allow for `F2` detection
-- Update `ISSUE_TEMPLATE`
-- Standardize input/output/parameter structure in `README.md`
-- Avoid modification of input parameter `output_dir`
-- Create default docker container registry parameter for tools
-- Use `methods.setup_process_afterscript()` to capture log files
-- Use metadata-as-input rather than `addParams`
 
----
-
-## [1.0.0] - YYYY-MM-DD
 ### Added
-- For new features.
-- Added item 1.
+
+- SHA-512 checksum sidecars for every pepXML rank, PIN, and idXML result.
 
 ### Changed
-- For changes in existing functionality.
-- Changed item 1.
 
-### Deprecated
-- For soon-to-be removed features.
+- Replace node-specific template resource profiles with one allocation for each pipeline process.
 
-### Removed
-- For now removed features.
-- Removed item 1.
+## [0.1.0] - 2026-10-16
 
-### Fixed
-- For any bug fixes.
-- Fixed item 1.
+### Added
 
-### Security
-- In case of vulnerabilities.
+- First unfractionated DIA search workflow using a separately supplied MSFragger JAR and target-decoy FASTA.
+- Native MSFragger parameter generation from a dedicated configuration namespace, with schema validation and optional intermediate-file publication.
+- CSV input with one mzML per sample; unfiltered pepXML rank files and PIN output for each search.
+- pyOpenMS conversion of all pepXML ranks into one idXML per sample, retaining mzML origin and rank provenance.
+- UCLA NFTest integration case and a runner that retains test output and work files under `/scratch`.

@@ -1,0 +1,3 @@
+sample_name,mzML
+sample_01,/absolute/path/to/sample_01.mzML
+sample_02,/absolute/path/to/sample_02.mzML

@@ -3,14 +3,6 @@ dataset_id:
   type: 'String'
   required: true
   help: 'Dataset identifier'
-patient_id:
-  type: 'String'
-  required: true
-  help: 'Patient identifier'
-sample_id:
-  type: 'String'
-  required: true
-  help: 'Sample identifier'
 param_name:
   type: 'String'
   required: false
@@ -21,6 +13,169 @@ output_dir:
   mode: 'w'
   required: true
   help: 'Absolute path to output directory'
+save_intermediate_files:
+  type: 'Bool'
+  default: false
+  help: 'Publish generated MSFragger parameter files and other intermediate outputs'
+input_csv:
+  type: 'Path'
+  mode: 'r'
+  required: true
+  help: 'CSV with unique sample_name and mzML columns; one unfractionated run per sample'
+msfragger_executable:
+  type: 'Path'
+  mode: 'r'
+  required: true
+  help: 'Path to the separately obtained MSFragger JAR'
+decoy_database:
+  type: 'Path'
+  mode: 'r'
+  required: true
+  help: 'Target-decoy protein FASTA used for the MSFragger search'
+decoy_prefix:
+  type: 'String'
+  required: true
+  help: 'Prefix of decoy FASTA entries'
+MSFragger:
+  type: 'Namespace'
+  required: true
+  help: 'MSFragger-DIA parameters, using native fragger.params key names'
+  elements:
+    data_type:
+      type: 'Number'
+      choices: [1]
+      help: 'DIA acquisition mode; fixed to 1 for this pipeline'
+    num_threads:
+      type: 'Number'
+      help: 'MSFragger threads; 0 selects available CPUs'
+    precursor_mass_lower:
+      type: 'Number'
+      help: 'Lower precursor mass search bound'
+    precursor_mass_upper:
+      type: 'Number'
+      help: 'Upper precursor mass search bound'
+    precursor_mass_units:
+      type: 'Number'
+      choices: [0, 1]
+      help: 'Precursor mass units: 0 Da, 1 ppm'
+    precursor_true_tolerance:
+      type: 'Number'
+      help: 'True precursor mass tolerance for calibration'
+    precursor_true_units:
+      type: 'Number'
+      choices: [0, 1]
+      help: 'True precursor mass units: 0 Da, 1 ppm'
+    fragment_mass_tolerance:
+      type: 'Number'
+      help: 'Fragment mass tolerance'
+    fragment_mass_units:
+      type: 'Number'
+      choices: [0, 1]
+      help: 'Fragment mass units: 0 Da, 1 ppm'
+    calibrate_mass:
+      type: 'Number'
+      choices: [0, 1, 2, 4]
+      help: 'Mass calibration and optimization mode'
+    deisotope:
+      type: 'Number'
+      choices: [0, 1, 2]
+      help: 'Peak deisotoping mode'
+    deneutralloss:
+      type: 'Number'
+      choices: [0, 1]
+      help: 'Remove neutral-loss peaks when enabled'
+    isotope_error:
+      type: 'String'
+      help: 'Slash-separated precursor isotope errors'
+    precursor_mass_mode:
+      type: 'String'
+      choices: ['isolated', 'selected', 'corrected']
+      help: 'Precursor mass interpretation'
+    require_precursor:
+      type: 'Number'
+      choices: [0, 1]
+      help: 'Require precursor evidence for DIA PSMs'
+    reuse_dia_fragment_peaks:
+      type: 'Number'
+      choices: [0, 1]
+      help: 'Permit fragment peaks to match multiple peptides'
+    fragment_ion_series:
+      type: 'String'
+      help: 'Comma-separated fragment ion series'
+    search_enzyme_name_1:
+      type: 'String'
+      help: 'Primary digestion enzyme name'
+    search_enzyme_cut_1:
+      type: 'String'
+      help: 'Primary enzyme cleavage residues'
+    search_enzyme_nocut_1:
+      type: 'String'
+      allow_empty: true
+      help: 'Residues that prevent primary enzyme cleavage'
+    search_enzyme_sense_1:
+      type: 'String'
+      choices: ['C', 'N']
+      help: 'Primary enzyme cleavage terminus'
+    allowed_missed_cleavage_1:
+      type: 'Number'
+      help: 'Maximum missed cleavages for primary enzyme'
+    num_enzyme_termini:
+      type: 'Number'
+      choices: [0, 1, 2]
+      help: 'Required enzymatic peptide termini'
+    clip_nTerm_M:
+      type: 'Number'
+      choices: [0, 1]
+      help: 'Allow protein N-terminal methionine clipping'
+    variable_mod_01:
+      type: 'String'
+      allow_empty: true
+      help: 'First variable modification in native MSFragger syntax; empty disables it'
+    variable_mod_02:
+      type: 'String'
+      allow_empty: true
+      help: 'Second variable modification in native MSFragger syntax; empty disables it'
+    allow_multiple_variable_mods_on_residue:
+      type: 'Number'
+      choices: [0, 1]
+      help: 'Allow multiple variable modifications on one residue'
+    max_variable_mods_per_peptide:
+      type: 'Number'
+      help: 'Maximum variable modifications per peptide'
+    output_format:
+      type: 'String'
+      choices: ['pepXML_pin']
+      help: 'Write pepXML and PIN for downstream processing'
+    output_report_topN:
+      type: 'Number'
+      help: 'Number of PSMs reported per spectrum'
+    output_max_expect:
+      type: 'Number'
+      help: 'Maximum expectation value for reported PSMs'
+    digest_min_length:
+      type: 'Number'
+      help: 'Minimum in-silico peptide length'
+    digest_max_length:
+      type: 'Number'
+      help: 'Maximum in-silico peptide length'
+    digest_mass_range:
+      type: 'String'
+      help: 'Space-separated minimum and maximum peptide mass in Da'
+    max_fragment_charge:
+      type: 'Number'
+      help: 'Maximum theoretical fragment charge'
+    minimum_peaks:
+      type: 'Number'
+      help: 'Minimum experimental spectrum peak count'
+    use_topN_peaks:
+      type: 'Number'
+      help: 'Maximum experimental peaks retained per spectrum'
+    min_matched_fragments:
+      type: 'Number'
+      help: 'Minimum matched fragments for a reported PSM'
+    add_C_cysteine:
+      type: 'Number'
+      help: 'Fixed mass added to cysteine residues'
 apptainer_library:
   type: 'Path'
   mode: 'r'
@@ -54,21 +209,8 @@ base_resource_update:
       type: 'ResourceUpdateList'
       required: false
       help: 'List of CPU updates'
-input:
-  type: 'InputNamespace'
-  required: true
-  help: 'Input samples'
-  elements:
-    BAM:
-      type: 'InputBAMNamespace'
-      required: true
-      help: 'Input BAM samples grouped by sample type'
-      elements:
-        normal:
-          type: 'BAMEntryList'
-          required: false
-          help: 'Input normal sample'
-        tumor:
-          type: 'BAMEntryList'
-          required: false
-          help: 'Input tumor sample'
+resource_allocation_profile_tag:
+  type: 'String'
+  choices: ['default']
+  default: 'default'
+  help: 'Single process-specific resource allocation profile; independent of node type'

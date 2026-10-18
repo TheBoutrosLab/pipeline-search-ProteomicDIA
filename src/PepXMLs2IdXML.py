@@ -57,7 +57,9 @@ def convert(mzml: Path, input_dir: Path, output: Path) -> None:
     lookup = oms.SpectrumMetaDataLookup()
     lookup.readSpectra(experiment, r"scan=(?<SCAN>\d+)")
 
-    all_proteins = []
+    merged_protein = None
+    merged_hits = {}
+    merged_identifier = f"{mzml.stem}_MSFragger"
     all_peptides = oms.PeptideIdentificationList()
     for rank, pepxml in ranks:
         proteins = []
@@ -70,16 +72,17 @@ def convert(mzml: Path, input_dir: Path, output: Path) -> None:
             raise ValueError(f"No identification run found in {pepxml}")
 
         identifiers = {}
-        for index, protein in enumerate(proteins, start=1):
+        for protein in proteins:
             old_id = text(protein.getIdentifier())
             if old_id in identifiers:
                 raise ValueError(f"Repeated protein run identifier in {pepxml}: {old_id}")
-            new_id = f"{mzml.stem}_MSFragger_rank{rank}_run{index}"
-            identifiers[old_id] = new_id
-            protein.setIdentifier(new_id)
-            protein.setPrimaryMSRunPath([mzml.name.encode("utf-8")], False)
-            protein.setMetaValue("msfragger_rank", rank)
-            all_proteins.append(protein)
+            identifiers[old_id] = merged_identifier
+            if merged_protein is None:
+                merged_protein = protein
+                merged_protein.setIdentifier(merged_identifier)
+                merged_protein.setPrimaryMSRunPath([mzml.name.encode("utf-8")], False)
+            for hit in protein.getHits():
+                merged_hits.setdefault(text(hit.getAccession()), hit)
 
         for peptide in peptides:
             old_id = text(peptide.getIdentifier())
@@ -93,7 +96,8 @@ def convert(mzml: Path, input_dir: Path, output: Path) -> None:
             peptide.setMetaValue("msfragger_pepxml", pepxml.name)
             all_peptides.push_back(peptide)
 
-    oms.IdXMLFile().store(str(output), all_proteins, all_peptides)
+    merged_protein.setHits(list(merged_hits.values()))
+    oms.IdXMLFile().store(str(output), [merged_protein], all_peptides)
     print(
         f"Wrote {len(all_peptides)} peptide identifications "
         f"from {len(ranks)} pepXML rank file(s) to {output}"

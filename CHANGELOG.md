@@ -5,6 +5,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Merge MSFragger DIA pepXML ranks into a single protein identification run per mzML so downstream OpenMS tools can process the idXML and export mzTab.
+
 ## [0.1.0] - 2026-10-16
 
 ### Added

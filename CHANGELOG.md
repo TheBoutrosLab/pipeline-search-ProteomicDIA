@@ -5,6 +5,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1-rc.1] - 2026-10-17
+
 ### Fixed
 
 - Merge MSFragger DIA pepXML ranks into a single protein identification run per mzML so downstream OpenMS tools can process the idXML and export mzTab.
@@ -20,3 +22,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - UCLA NFTest integration case and a runner that retains test output and work files under `/scratch`.
 - SHA-512 checksum sidecars for every pepXML rank, PIN, and idXML result.
 
+[0.1.0]: https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/releases/tag/v0.1.0
+[0.1.1-rc.1]: https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/compare/v0.1.0...v0.1.1-rc.1
+[unreleased]: https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/compare/v0.1.1-rc.1...HEAD

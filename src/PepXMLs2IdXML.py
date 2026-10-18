@@ -72,7 +72,7 @@ def convert(mzml: Path, input_dir: Path, output: Path) -> None:
             raise ValueError(f"No identification run found in {pepxml}")
 
         identifiers = {}
-        for index, protein in enumerate(proteins, start=1):
+        for protein in proteins:
             old_id = text(protein.getIdentifier())
             if old_id in identifiers:
                 raise ValueError(f"Repeated protein run identifier in {pepxml}: {old_id}")

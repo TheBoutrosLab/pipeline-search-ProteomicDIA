@@ -100,13 +100,9 @@ workflow {
     search_files = search_database_MSFragger.out.search_results
         .flatMap { sample_name, pepxml_files, pin_file ->
             def ranks = pepxml_files instanceof Collection ? pepxml_files : [pepxml_files]
-            ranks + [pin_file]
+            (ranks + [pin_file]).collect { result_file -> tuple(sample_name, result_file) }
         }
     idxml_files = convert_pepXML2idXML_MSFragger.out.idxml
-        .map { sample_name, idxml_file -> idxml_file }
+        .map { sample_name, idxml_file -> tuple(sample_name, idxml_file) }
     calculate_SHA512(search_files.mix(idxml_files))
-
-    workflow.onComplete = {
-        WorkflowFinalizer.completeWorkflow(workflow, params)
-    }
 }

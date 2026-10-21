@@ -45,6 +45,7 @@ String renderFraggerParams(Map msfragger_options, Object fragger_decoy_prefix) {
 
 process write_MSFraggerParams {
     label 'process_low'
+    ext log_dir: { "_run/${task.process.replace(':', '/')}/task-${task.index}-attempt-${task.attempt}" }
 
     publishDir path: "${params.intermediate_file_dir}/MSFragger",
         mode: 'copy',

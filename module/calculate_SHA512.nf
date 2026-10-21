@@ -2,13 +2,14 @@
 process calculate_SHA512 {
     container params.docker_image_java
     label 'process_low'
+    ext log_dir: { "${sample_name}/${task.process.replace(':', '/')}/task-${task.index}-attempt-${task.attempt}" }
 
     publishDir path: "${params.output_dir_base}/output/MSFragger",
         mode: 'copy',
         pattern: '*.sha512'
 
     input:
-        path result_file
+        tuple val(sample_name), path(result_file)
 
     output:
         path "${result_file.name}.sha512", emit: checksum

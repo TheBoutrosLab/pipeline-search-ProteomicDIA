@@ -5,6 +5,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Preserve separate, browsable process logs for every sample and task, including checksum calculations.
+
 ## [0.1.1-rc.1] - 2026-10-17
 
 ### Fixed

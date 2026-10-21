@@ -10,6 +10,7 @@
 process search_database_MSFragger {
     container params.docker_image_java
     label 'process_high'
+    ext log_dir: { "${sample_name}/${task.process.replace(':', '/')}/task-${task.index}-attempt-${task.attempt}" }
 
     publishDir path: "${params.output_dir_base}/output/MSFragger",
         mode: 'copy',

@@ -2,6 +2,7 @@
 process convert_pepXML2idXML_MSFragger {
     container params.docker_image_pyopenms
     label 'process_medium'
+    ext log_dir: { "${sample_name}/${task.process.replace(':', '/')}/task-${task.index}-attempt-${task.attempt}" }
     ext containerOptions: {
         params.container_mount_flag
             ? "${params.container_mount_flag} \"${projectDir}/src:${projectDir}/src:ro\""

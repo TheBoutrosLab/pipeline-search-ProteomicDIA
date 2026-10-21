@@ -102,7 +102,7 @@
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
       <li class="breadcrumb-item active">How To Run</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/b8d70678566d349b4ba870c28758931907e7440f/README.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/788419073dcc29a029a0b78f68ea8f3de28fa0d9/README.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -113,10 +113,10 @@
                 <h2 id="how-to-run">How To Run</h2>
 <ol>
 <li>
-<p>Initialize the repository's Git submodules with <code>git submodule update --init --recursive</code>. Copy <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/b8d70678566d349b4ba870c28758931907e7440f/config/template.config">config/template.config</a> to a run-specific config file and set <code>dataset_id</code>, <code>input_csv</code>, <code>output_dir</code>, <code>decoy_database</code>, <code>decoy_prefix</code>, and <code>msfragger_executable</code>. Review the <code>MSFragger</code> search settings for the data and FASTA.</p>
+<p>Initialize the repository's Git submodules with <code>git submodule update --init --recursive</code>. Copy <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/788419073dcc29a029a0b78f68ea8f3de28fa0d9/config/template.config">config/template.config</a> to a run-specific config file and set <code>dataset_id</code>, <code>input_csv</code>, <code>output_dir</code>, <code>decoy_database</code>, <code>decoy_prefix</code>, and <code>msfragger_executable</code>. Review the <code>MSFragger</code> search settings for the data and FASTA.</p>
 </li>
 <li>
-<p>Create an input CSV using <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/b8d70678566d349b4ba870c28758931907e7440f/input/input.csv">input/input.csv</a>. List one unfractionated mzML file per sample.</p>
+<p>Create an input CSV using <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/788419073dcc29a029a0b78f68ea8f3de28fa0d9/input/input.csv">input/input.csv</a>. List one unfractionated mzML file per sample.</p>
 </li>
 <li>
 <p>Obtain the MSFragger JAR separately under its license, then run the pipeline:</p>
@@ -126,7 +126,7 @@
    export NXF_VER=24.10.6
    export NXF_SYNTAX_PARSER=v1
    nextflow run . -c my-run.config</code></p>
-<p>The template uses Docker by default. Select <code>-profile apptainer</code> or <code>-profile singularity</code> where appropriate. The <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/b8d70678566d349b4ba870c28758931907e7440f/.env-template"><code>.env-template</code></a> records the Nextflow version and parser used by the shared pipeline configuration.</p>
+<p>The template uses Docker by default. Select <code>-profile apptainer</code> or <code>-profile singularity</code> where appropriate. The <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/788419073dcc29a029a0b78f68ea8f3de28fa0d9/.env-template"><code>.env-template</code></a> records the Nextflow version and parser used by the shared pipeline configuration.</p>
               
             </div>
           </div><footer>

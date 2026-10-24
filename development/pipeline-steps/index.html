@@ -102,7 +102,7 @@
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
       <li class="breadcrumb-item active">Pipeline Steps</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/788419073dcc29a029a0b78f68ea8f3de28fa0d9/README.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/3e41f6bc8cf2fea212477fdeb7307b885431af1b/README.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -126,7 +126,7 @@
   PIN --&gt; HASH
   IDXML --&gt; HASH
 </code></pre>
-<p><code>write_MSFraggerParams</code> creates a native <code>fragger.params</code> file from <code>params.MSFragger</code> and the decoy prefix. <code>search_database_MSFragger</code> runs the supplied JAR on each mzML with the target-decoy FASTA, producing a PIN file and one or more pepXML files (including <code>_rankN.pepXML</code> files in DIA mode). <code>convert_pepXML2idXML_MSFragger</code> uses <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/788419073dcc29a029a0b78f68ea8f3de28fa0d9/src/PepXMLs2IdXML.py">PepXMLs2IdXML.py</a> and pyOpenMS 3.5.0 to combine the pepXML ranks for each sample. The idXML records the source mzML as <code>file_origin</code> and retains the MSFragger rank and source pepXML filename as separate metadata.</p>
+<p><code>write_MSFraggerParams</code> creates a native <code>fragger.params</code> file from <code>params.MSFragger</code> and the decoy prefix. <code>search_database_MSFragger</code> runs the supplied JAR on each mzML with the target-decoy FASTA, producing a PIN file and one or more pepXML files (including <code>_rankN.pepXML</code> files in DIA mode). <code>convert_pepXML2idXML_MSFragger</code> uses <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/3e41f6bc8cf2fea212477fdeb7307b885431af1b/src/PepXMLs2IdXML.py">PepXMLs2IdXML.py</a> and pyOpenMS 3.5.0 to combine the pepXML ranks for each sample. The idXML records the source mzML as <code>file_origin</code> and retains the MSFragger rank and source pepXML filename as separate metadata.</p>
 <p><code>calculate_SHA512</code> writes a checksum sidecar for every pepXML rank, PIN file, and idXML file.</p>
               
             </div>

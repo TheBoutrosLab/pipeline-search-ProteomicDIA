@@ -94,6 +94,9 @@ The protein FASTA must already contain target and decoy entries. Set `decoy_pref
 | `base_resource_update` | namespace | Optional per-process CPU and memory multipliers. |
 
 The full MSFragger parameter list and validation rules are in [config/schema.yaml](config/schema.yaml).
+To search precursor charges 1 through 5 regardless of charge annotations in the mzML,
+set `MSFragger.precursor_charge = '1 5'` and `MSFragger.override_charge = 1`.
+With the default `override_charge = 0`, MSFragger uses the charge recorded in the spectrum when available.
 
 ## Outputs
 

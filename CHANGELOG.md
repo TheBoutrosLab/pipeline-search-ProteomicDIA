@@ -5,6 +5,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add MSFragger precursor charge range and charge override settings with schema validation and usage guidance.
+
 ## [0.1.1] - 2026-10-24
 
 ### Fixed

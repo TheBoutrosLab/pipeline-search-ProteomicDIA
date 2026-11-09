@@ -91,6 +91,13 @@ MSFragger:
       type: 'String'
       choices: ['isolated', 'selected', 'corrected']
       help: 'Precursor mass interpretation'
+    precursor_charge:
+      type: 'String'
+      help: 'Space-separated minimum and maximum precursor charges; used when override_charge is 1'
+    override_charge:
+      type: 'Number'
+      choices: [0, 1]
+      help: 'Use precursor_charge range instead of charges recorded in the spectra'
     require_precursor:
       type: 'Number'
       choices: [0, 1]

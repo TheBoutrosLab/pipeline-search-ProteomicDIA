@@ -1,0 +1,7 @@
+sample_name,fraction,mzML
+LFQ_Orbitrap_AIF_Ecoli_01,F1,$TEST_DATA_DIR/ecoli_dia/mzML/LFQ_Orbitrap_AIF_Ecoli_01_indexed-10min-3.mzML
+LFQ_Orbitrap_AIF_Ecoli_01,F2,$TEST_DATA_DIR/ecoli_dia/mzML/LFQ_Orbitrap_AIF_Ecoli_01_indexed-10min-4.mzML
+LFQ_Orbitrap_AIF_Ecoli_01,F3,$TEST_DATA_DIR/ecoli_dia/mzML/LFQ_Orbitrap_AIF_Ecoli_01_indexed-10min-5.mzML
+LFQ_Orbitrap_AIF_Ecoli_02,F1,$TEST_DATA_DIR/ecoli_dia/mzML/LFQ_Orbitrap_AIF_Ecoli_02_indexed-10min-3.mzML
+LFQ_Orbitrap_AIF_Ecoli_02,F2,$TEST_DATA_DIR/ecoli_dia/mzML/LFQ_Orbitrap_AIF_Ecoli_02_indexed-10min-4.mzML
+LFQ_Orbitrap_AIF_Ecoli_02,F3,$TEST_DATA_DIR/ecoli_dia/mzML/LFQ_Orbitrap_AIF_Ecoli_02_indexed-10min-5.mzML

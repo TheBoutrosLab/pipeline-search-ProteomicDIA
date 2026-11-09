@@ -18,6 +18,10 @@
                 "memory": {"strategy": "exponential", "operand": 2}
             }
         },
+        "merge_idXML_MSFragger": {
+            "cpus": {"min": 2, "fraction": 1.0, "max": 2},
+            "memory": {"min": "8 GB", "fraction": 1.0, "max": "8 GB"}
+        },
         "calculate_SHA512": {
             "cpus": {"min": 1, "fraction": 1.0, "max": 1},
             "memory": {"min": "1 GB", "fraction": 1.0, "max": "1 GB"}

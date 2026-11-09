@@ -1,4 +1,4 @@
-"""Combine one sample's MSFragger DIA pepXML ranks into a single idXML."""
+"""Combine one DIA fraction's MSFragger pepXML ranks into a single idXML."""
 
 import argparse
 import re
@@ -40,7 +40,7 @@ def text(value: object) -> str:
     return value.decode("utf-8") if isinstance(value, bytes) else str(value)
 
 
-def convert(mzml: Path, input_dir: Path, output: Path) -> None:
+def convert(mzml: Path, fraction: str, input_dir: Path, output: Path) -> None:
     """Combine all ranked pepXML identifications for one mzML into idXML."""
     if not mzml.is_file():
         raise FileNotFoundError(mzml)
@@ -93,6 +93,7 @@ def convert(mzml: Path, input_dir: Path, output: Path) -> None:
             peptide.setIdentifier(identifiers[old_id])
             peptide.setMetaValue("msfragger_rank", rank)
             peptide.setMetaValue("file_origin", mzml.name)
+            peptide.setMetaValue("fraction", fraction)
             peptide.setMetaValue("msfragger_pepxml", pepxml.name)
             all_peptides.push_back(peptide)
 
@@ -108,10 +109,11 @@ def main() -> None:
     """Parse command-line arguments and run the conversion."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--mzml", required=True, type=Path)
+    parser.add_argument("--fraction", default="1")
     parser.add_argument("--input-dir", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
-    convert(args.mzml, args.input_dir, args.output)
+    convert(args.mzml, args.fraction, args.input_dir, args.output)
 
 
 if __name__ == "__main__":

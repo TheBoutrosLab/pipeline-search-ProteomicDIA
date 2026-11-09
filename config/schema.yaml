@@ -21,7 +21,7 @@ input_csv:
   type: 'Path'
   mode: 'r'
   required: true
-  help: 'CSV with unique sample_name and mzML columns; one unfractionated run per sample'
+  help: 'CSV with sample_name,fraction,mzML columns (or legacy sample_name,mzML for single fractions)'
 msfragger_executable:
   type: 'Path'
   mode: 'r'

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Inputs - pipeline-search-ProteomicDIA</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/version-select.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Inputs";
+        var mkdocs_page_input_path = "inputs.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> pipeline-search-ProteomicDIA
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../overview/">Overview</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../how-to-run/">How To Run</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../pipeline-steps/">Pipeline Steps</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Inputs</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#input-csv">Input CSV</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#config">Config</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../outputs/">Outputs</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../resources/">Resources</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../testing-and-validation/">Testing and Validation</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../references/">References</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../discussions/">Discussions</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../contributors/">Contributors</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../license/">License</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">pipeline-search-ProteomicDIA</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Inputs</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/v0.2.2/README.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="inputs">Inputs</h2>
+<h3 id="input-csv">Input CSV</h3>
+<p>For fractionated samples, the CSV has one mzML per sample and fraction:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sample_name</code></td>
+<td>yes</td>
+<td>Biological sample name used for the merged idXML. Reuse it across that sample's fractions. Use letters, digits, <code>.</code>, <code>_</code>, or <code>-</code>, starting with a letter or digit.</td>
+</tr>
+<tr>
+<td><code>fraction</code></td>
+<td>yes for fractionated samples</td>
+<td>Unique label within each sample. The two-column legacy CSV omits this field and uses fraction <code>1</code>. Use the same characters as <code>sample_name</code>.</td>
+</tr>
+<tr>
+<td><code>mzML</code></td>
+<td>yes</td>
+<td>Path to the fraction's mzML. Relative paths resolve from the CSV directory. Each mzML and mzML basename may appear only once in the CSV.</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-csv">sample_name,fraction,mzML
+sample_01,F1,/data/sample_01_fraction_1.mzML
+sample_01,F2,/data/sample_01_fraction_2.mzML
+sample_02,F1,/data/sample_02_fraction_1.mzML
+</code></pre>
+<p>The protein FASTA must already contain target and decoy entries. Set <code>decoy_prefix</code> to match the FASTA's decoy identifiers; the pipeline does not generate decoys.</p>
+<h3 id="config">Config</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dataset_id</code></td>
+<td>string</td>
+<td>Identifier for the output subdirectory.</td>
+</tr>
+<tr>
+<td><code>input_csv</code></td>
+<td>path</td>
+<td>CSV with <code>sample_name,fraction,mzML</code> columns, or legacy <code>sample_name,mzML</code> for single fractions.</td>
+</tr>
+<tr>
+<td><code>output_dir</code></td>
+<td>path</td>
+<td>Root output directory.</td>
+</tr>
+<tr>
+<td><code>decoy_database</code></td>
+<td>path</td>
+<td>Target-decoy protein FASTA.</td>
+</tr>
+<tr>
+<td><code>decoy_prefix</code></td>
+<td>string</td>
+<td>Prefix of decoy FASTA entries; defaults to <code>rev_</code>.</td>
+</tr>
+<tr>
+<td><code>msfragger_executable</code></td>
+<td>path</td>
+<td>Separately obtained MSFragger JAR.</td>
+</tr>
+<tr>
+<td><code>MSFragger</code></td>
+<td>namespace</td>
+<td>Native MSFragger parameter names. Commonly changed values are in <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/1cbbb697ae68d7ee4f8db7205982a048ce8f7f1f/config/template.config">config/template.config</a>; other defaults are in <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/1cbbb697ae68d7ee4f8db7205982a048ce8f7f1f/config/default.config">config/default.config</a>. DIA mode and pepXML/PIN output are fixed for this version.</td>
+</tr>
+<tr>
+<td><code>save_intermediate_files</code></td>
+<td>boolean</td>
+<td>Publish the generated <code>fragger.params</code>; defaults to <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>work_dir</code></td>
+<td>path</td>
+<td>Optional Nextflow work directory; otherwise uses <code>NXF_WORK</code> or <code>work</code> under the launch directory. Use a distinct directory for concurrent runs to avoid work-file collisions.</td>
+</tr>
+<tr>
+<td><code>base_resource_update</code></td>
+<td>namespace</td>
+<td>Optional per-process CPU and memory multipliers.</td>
+</tr>
+</tbody>
+</table>
+<p>The full MSFragger parameter list and validation rules are in <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/1cbbb697ae68d7ee4f8db7205982a048ce8f7f1f/config/schema.yaml">config/schema.yaml</a>.
+To search precursor charges 1 through 5 regardless of charge annotations in the mzML,
+set <code>MSFragger.precursor_charge = '1 5'</code> and <code>MSFragger.override_charge = 1</code>.
+With the default <code>override_charge = 0</code>, MSFragger uses the charge recorded in the spectrum when available.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../pipeline-steps/" class="btn btn-neutral float-left" title="Pipeline Steps"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../outputs/" class="btn btn-neutral float-right" title="Outputs">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/tree/v0.2.2" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../pipeline-steps/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../outputs/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../js/version-select.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -106,7 +106,7 @@
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
       <li class="breadcrumb-item active">Inputs</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/40a502a3c7bac0d8eff1b17c12e34d4a7dc7ce3d/README.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/2ababb27fe7d45a0bd465d86359f9bca8089d72c/README.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -116,7 +116,7 @@
               
                 <h2 id="inputs">Inputs</h2>
 <h3 id="input-csv">Input CSV</h3>
-<p>The CSV must have exactly these columns, with one unfractionated mzML per row:</p>
+<p>For fractionated samples, the CSV has one mzML per sample and fraction:</p>
 <table>
 <thead>
 <tr>
@@ -129,18 +129,24 @@
 <tr>
 <td><code>sample_name</code></td>
 <td>yes</td>
-<td>Unique name used for the sample's idXML output. Use letters, digits, <code>.</code>, <code>_</code>, or <code>-</code>, starting with a letter or digit.</td>
+<td>Biological sample name used for the merged idXML. Reuse it across that sample's fractions. Use letters, digits, <code>.</code>, <code>_</code>, or <code>-</code>, starting with a letter or digit.</td>
+</tr>
+<tr>
+<td><code>fraction</code></td>
+<td>yes for fractionated samples</td>
+<td>Unique label within each sample. The two-column legacy CSV omits this field and uses fraction <code>1</code>. Use the same characters as <code>sample_name</code>.</td>
 </tr>
 <tr>
 <td><code>mzML</code></td>
 <td>yes</td>
-<td>Path to the sample's mzML. Relative paths resolve from the CSV directory. Each mzML and mzML basename may appear only once.</td>
+<td>Path to the fraction's mzML. Relative paths resolve from the CSV directory. Each mzML and mzML basename may appear only once in the CSV.</td>
 </tr>
 </tbody>
 </table>
-<pre><code class="language-csv">sample_name,mzML
-sample_01,/data/sample_01.mzML
-sample_02,/data/sample_02.mzML
+<pre><code class="language-csv">sample_name,fraction,mzML
+sample_01,F1,/data/sample_01_fraction_1.mzML
+sample_01,F2,/data/sample_01_fraction_2.mzML
+sample_02,F1,/data/sample_02_fraction_1.mzML
 </code></pre>
 <p>The protein FASTA must already contain target and decoy entries. Set <code>decoy_prefix</code> to match the FASTA's decoy identifiers; the pipeline does not generate decoys.</p>
 <h3 id="config">Config</h3>
@@ -161,7 +167,7 @@ sample_02,/data/sample_02.mzML
 <tr>
 <td><code>input_csv</code></td>
 <td>path</td>
-<td>CSV with <code>sample_name,mzML</code> columns.</td>
+<td>CSV with <code>sample_name,fraction,mzML</code> columns, or legacy <code>sample_name,mzML</code> for single fractions.</td>
 </tr>
 <tr>
 <td><code>output_dir</code></td>
@@ -186,7 +192,7 @@ sample_02,/data/sample_02.mzML
 <tr>
 <td><code>MSFragger</code></td>
 <td>namespace</td>
-<td>Native MSFragger parameter names. Commonly changed values are in <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/40a502a3c7bac0d8eff1b17c12e34d4a7dc7ce3d/config/template.config">config/template.config</a>; other defaults are in <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/40a502a3c7bac0d8eff1b17c12e34d4a7dc7ce3d/config/default.config">config/default.config</a>. DIA mode and pepXML/PIN output are fixed for this version.</td>
+<td>Native MSFragger parameter names. Commonly changed values are in <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/2ababb27fe7d45a0bd465d86359f9bca8089d72c/config/template.config">config/template.config</a>; other defaults are in <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/2ababb27fe7d45a0bd465d86359f9bca8089d72c/config/default.config">config/default.config</a>. DIA mode and pepXML/PIN output are fixed for this version.</td>
 </tr>
 <tr>
 <td><code>save_intermediate_files</code></td>
@@ -205,7 +211,7 @@ sample_02,/data/sample_02.mzML
 </tr>
 </tbody>
 </table>
-<p>The full MSFragger parameter list and validation rules are in <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/40a502a3c7bac0d8eff1b17c12e34d4a7dc7ce3d/config/schema.yaml">config/schema.yaml</a>.
+<p>The full MSFragger parameter list and validation rules are in <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/2ababb27fe7d45a0bd465d86359f9bca8089d72c/config/schema.yaml">config/schema.yaml</a>.
 To search precursor charges 1 through 5 regardless of charge annotations in the mzML,
 set <code>MSFragger.precursor_charge = '1 5'</code> and <code>MSFragger.override_charge = 1</code>.
 With the default <code>override_charge = 0</code>, MSFragger uses the charge recorded in the spectrum when available.</p>

@@ -102,7 +102,7 @@
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
       <li class="breadcrumb-item active">Overview</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/40a502a3c7bac0d8eff1b17c12e34d4a7dc7ce3d/README.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/2ababb27fe7d45a0bd465d86359f9bca8089d72c/README.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -111,7 +111,8 @@
             <div class="section" itemprop="articleBody">
               
                 <h2 id="overview">Overview</h2>
-<p>This Nextflow DSL2 pipeline searches unfractionated DIA mzML files against a supplied target-decoy protein FASTA with MSFragger. It writes a native MSFragger parameter file, searches each sample independently, and combines that sample's ranked pepXML results into one idXML with pyOpenMS. Unfiltered pepXML, PIN, and idXML results are retained with SHA-512 checksums for downstream validation and analysis. This version does not perform FDR estimation, PSM filtering, or quantification.</p>
+<p>This Nextflow DSL2 pipeline searches DIA mzML files against a supplied target-decoy protein FASTA with MSFragger. It writes a native MSFragger parameter file, searches each fraction independently, combines that fraction's ranked pepXML results into one idXML with pyOpenMS, then merges the fraction idXMLs into one sample idXML with OpenMS IDMerger. Unfiltered pepXML, PIN, and idXML results are retained with SHA-512 checksums for downstream validation and analysis. This version does not perform FDR estimation, PSM filtering, or quantification.</p>
+<p><img alt="DIA database search workflow schematic" src="../img/flow-diagram.svg?raw=true" /></p>
               
             </div>
           </div><footer>

@@ -102,7 +102,7 @@
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
       <li class="breadcrumb-item active">Outputs</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/40a502a3c7bac0d8eff1b17c12e34d4a7dc7ce3d/README.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/2ababb27fe7d45a0bd465d86359f9bca8089d72c/README.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -111,7 +111,7 @@
             <div class="section" itemprop="articleBody">
               
                 <h2 id="outputs">Outputs</h2>
-<p>Results are written under <code>&lt;output_dir&gt;/search-ProteomicDIA-0.1.0/&lt;dataset_id&gt;/</code>:</p>
+<p>Results are written under <code>&lt;output_dir&gt;/search-ProteomicDIA-&lt;version&gt;/&lt;dataset_id&gt;/</code>:</p>
 <table>
 <thead>
 <tr>
@@ -129,19 +129,27 @@
 <td>Unfiltered MSFragger PIN file.</td>
 </tr>
 <tr>
+<td><code>output/MSFragger/per_fraction/&lt;mzML basename&gt;_MSFragger.idXML</code></td>
+<td>One idXML containing that fraction's pepXML ranks.</td>
+</tr>
+<tr>
 <td><code>output/MSFragger/&lt;sample_name&gt;_MSFragger.idXML</code></td>
-<td>One idXML containing the sample's pepXML ranks.</td>
+<td>One merged idXML containing all fractions of a sample.</td>
 </tr>
 <tr>
 <td><code>output/MSFragger/&lt;result filename&gt;.sha512</code></td>
-<td>SHA-512 checksum for each pepXML, PIN, and idXML file; compatible with <code>sha512sum -c</code>.</td>
+<td>SHA-512 checksums for pepXML, PIN, and merged idXML files; compatible with <code>sha512sum -c</code>.</td>
+</tr>
+<tr>
+<td><code>output/MSFragger/per_fraction/&lt;result filename&gt;.sha512</code></td>
+<td>SHA-512 checksums for per-fraction idXML files.</td>
 </tr>
 <tr>
 <td><code>intermediate/MSFragger/fragger.params</code></td>
 <td>Generated search parameters, published only when <code>save_intermediate_files = true</code>.</td>
 </tr>
 <tr>
-<td><code>log-search-ProteomicDIA-0.1.0-&lt;timestamp&gt;/</code></td>
+<td><code>log-search-ProteomicDIA-&lt;version&gt;-&lt;timestamp&gt;/</code></td>
 <td>Nextflow reports, trace, configuration, and process logs.</td>
 </tr>
 </tbody>

@@ -5,6 +5,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Preserve fraction-to-mzML indices in merged DIA idXML so downstream mzTab export succeeds.
+
 ## [0.2.0] - 2026-11-09
 
 ### Added

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1400 930" role="img" aria-labelledby="title desc">
+  <title id="title">Proteomic DIA database search workflow</title>
+  <desc id="desc">An input CSV lists one mzML per sample and fraction, and a target-decoy protein FASTA supplies the search database. MSFragger searches each fraction, producing ranked pepXML and PIN files. The pepXML ranks are combined into one fraction idXML. Fraction idXML files are grouped by sample and merged to produce one sample idXML. SHA-512 checksums cover all retained result files.</desc>
+  <defs>
+    <style>
+      text { font-family: Helvetica, Arial, sans-serif; fill: #173044; }
+      .heading { font-size: 23px; font-weight: 700; }
+      .label { font-size: 20px; font-weight: 700; }
+      .body { font-size: 18px; }
+      .detail { font-size: 15px; fill: #526879; }
+      .small { font-size: 14px; fill: #526879; }
+      .arrow { fill: none; stroke: #4b6172; stroke-width: 3; marker-end: url(#arrowhead); }
+      .wire { fill: none; stroke: #4b6172; stroke-width: 3; }
+      .input { fill: #eff4f8; stroke: #9bb1c2; stroke-width: 2; }
+      .fraction { fill: #edf4fd; stroke: #7fa4d2; stroke-width: 2; }
+      .sample { fill: #ebf7f2; stroke: #77b49c; stroke-width: 2; }
+      .step-blue { fill: #fff; stroke: #7398c7; stroke-width: 2; }
+      .step-green { fill: #fff; stroke: #70aa90; stroke-width: 2; }
+      .result { fill: #fff8e8; stroke: #d2a956; stroke-width: 2; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M1 1 L8 5 L1 9" fill="none" stroke="#4b6172" stroke-width="1.8"/>
+    </marker>
+  </defs>
+
+  <rect width="1400" height="930" fill="#fff"/>
+
+  <rect x="110" y="50" width="490" height="75" rx="15" class="input"/>
+  <text x="355" y="82" text-anchor="middle" class="label">Input CSV</text>
+  <text x="355" y="107" text-anchor="middle" class="detail">sample_name · fraction · mzML path</text>
+  <rect x="800" y="50" width="490" height="75" rx="15" class="input"/>
+  <text x="1045" y="82" text-anchor="middle" class="label">Decoy database</text>
+  <text x="1045" y="107" text-anchor="middle" class="detail">target-decoy protein FASTA</text>
+
+  <rect x="70" y="190" width="1260" height="370" rx="22" class="fraction"/>
+  <text x="96" y="229" class="heading">For each fraction</text>
+  <text x="96" y="254" class="detail">Search every mzML independently and combine its pepXML ranks.</text>
+
+  <path d="M355 125 V165 H82 V279 H202 V303" class="arrow"/>
+  <path d="M1045 125 V279 H460 V303" class="arrow"/>
+
+  <rect x="97" y="310" width="210" height="84" rx="12" class="step-blue"/>
+  <text x="202" y="345" text-anchor="middle" class="label">Fraction mzML</text>
+  <text x="202" y="371" text-anchor="middle" class="detail">from input CSV</text>
+  <path d="M307 352 H343" class="arrow"/>
+
+  <rect x="350" y="310" width="220" height="84" rx="12" class="step-blue"/>
+  <text x="460" y="345" text-anchor="middle" class="label">DIA search</text>
+  <text x="460" y="371" text-anchor="middle" class="detail">MSFragger</text>
+  <path d="M570 352 H604 V340 H613" class="arrow"/>
+  <path d="M604 352 V468 H613" class="arrow"/>
+
+  <rect x="620" y="300" width="220" height="80" rx="12" class="result"/>
+  <text x="730" y="333" text-anchor="middle" class="label">Ranked pepXML</text>
+  <text x="730" y="359" text-anchor="middle" class="detail">one or more rank files</text>
+  <path d="M840 340 H883" class="arrow"/>
+
+  <rect x="890" y="300" width="200" height="80" rx="12" class="step-blue"/>
+  <text x="990" y="333" text-anchor="middle" class="label">Combine ranks</text>
+  <text x="990" y="359" text-anchor="middle" class="detail">pyOpenMS</text>
+  <path d="M1090 340 H1133" class="arrow"/>
+
+  <rect x="1140" y="300" width="165" height="80" rx="12" class="result"/>
+  <text x="1222" y="332" text-anchor="middle" class="label">Fraction</text>
+  <text x="1222" y="358" text-anchor="middle" class="body">idXML</text>
+
+  <rect x="620" y="430" width="220" height="80" rx="12" class="result"/>
+  <text x="730" y="463" text-anchor="middle" class="label">PIN file</text>
+  <text x="730" y="489" text-anchor="middle" class="detail">one per mzML</text>
+
+  <rect x="70" y="620" width="1260" height="185" rx="22" class="sample"/>
+  <text x="96" y="659" class="heading">For each sample</text>
+  <text x="96" y="684" class="detail">Collect its fraction identifications into one sample result.</text>
+
+  <path d="M1222 380 V703" class="arrow"/>
+  <rect x="1040" y="710" width="263" height="70" rx="12" class="step-green"/>
+  <text x="1171" y="739" text-anchor="middle" class="body">Group by sample</text>
+  <text x="1171" y="761" text-anchor="middle" class="detail">all fraction idXMLs</text>
+  <path d="M1040 745 H907" class="arrow"/>
+
+  <rect x="610" y="710" width="290" height="70" rx="12" class="step-green"/>
+  <text x="755" y="739" text-anchor="middle" class="body">Merge fractions</text>
+  <text x="755" y="761" text-anchor="middle" class="detail">OpenMS IDMerger</text>
+  <path d="M610 745 H447" class="arrow"/>
+
+  <rect x="110" y="710" width="330" height="70" rx="12" class="result"/>
+  <text x="275" y="739" text-anchor="middle" class="body">Sample idXML</text>
+  <text x="275" y="761" text-anchor="middle" class="detail">one file per sample</text>
+
+  <rect x="250" y="847" width="900" height="63" rx="14" class="result"/>
+  <text x="700" y="874" text-anchor="middle" class="body">SHA-512 checksum sidecars</text>
+  <text x="700" y="896" text-anchor="middle" class="detail">for every pepXML, PIN, fraction idXML, and sample idXML</text>
+</svg>

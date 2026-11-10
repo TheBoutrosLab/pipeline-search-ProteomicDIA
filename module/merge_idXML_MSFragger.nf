@@ -31,7 +31,6 @@ process merge_idXML_MSFragger {
             -in ${input_args} \\
             -out merged.idXML \\
             -threads ${task.cpus} \\
-            -annotate_file_origin false \\
             -merge_proteins_add_PSMs
         mv -- merged.idXML "${output_name}"
         """

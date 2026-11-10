@@ -42,6 +42,9 @@ This Nextflow DSL2 pipeline searches DIA mzML files against a supplied target-de
 
 `write_MSFraggerParams` creates a native `fragger.params` file from `params.MSFragger` and the decoy prefix. `search_database_MSFragger` runs the supplied JAR on each mzML with the target-decoy FASTA, producing a PIN file and one or more pepXML files (including `_rankN.pepXML` files in DIA mode). `convert_pepXML2idXML_MSFragger` uses [PepXMLs2IdXML.py](src/PepXMLs2IdXML.py) and pyOpenMS 3.5.0 to combine the pepXML ranks for each fraction. Each PeptideIdentification records the source mzML as `file_origin`, its fraction label, MSFragger rank, and source pepXML filename. `merge_idXML_MSFragger` combines fractions into one protein identification run per sample while preserving those PSM annotations.
 
+For multi-fraction samples, IDMerger assigns each peptide an `id_merge_index`
+that selects its mzML from the merged run's `spectra_data` list.
+
 `calculate_SHA512` writes a checksum sidecar for every pepXML rank, PIN file, per-fraction idXML, and merged idXML.
 
 ## Inputs

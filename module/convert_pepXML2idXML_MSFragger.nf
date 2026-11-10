@@ -24,7 +24,6 @@ process convert_pepXML2idXML_MSFragger {
         set -euo pipefail
         python "${projectDir}/src/PepXMLs2IdXML.py" \\
             --mzml "${mzml_file}" \\
-            --fraction "${fraction}" \\
             --input-dir . \\
             --output "${mzml_file.baseName}_MSFragger.idXML"
         """

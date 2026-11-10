@@ -23,7 +23,7 @@ intermediate MSFragger parameters for inspection.
 The search publishes the PIN file and every pepXML rank file produced for each
 mzML, retaining MSFragger's output filenames. The conversion process then
 publishes one `per_fraction/<mzML basename>_MSFragger.idXML` containing all
-ranks for that fraction. Each identification records the source mzML as
-`file_origin`, its fraction label, original rank, and pepXML filename.
+ranks for that fraction. Each identification has `id_merge_index = 0` for its
+sole source mzML and retains the original rank and pepXML filename.
 IDMerger publishes one `<sample_name>_MSFragger.idXML` per sample. Each
 published pepXML, PIN, and idXML file has a `.sha512` sidecar beside it.

@@ -102,7 +102,7 @@
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
       <li class="breadcrumb-item active">Pipeline Steps</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/2ababb27fe7d45a0bd465d86359f9bca8089d72c/README.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/213aa2eeb0c3825fcca0ab2094ab3c22207e365d/README.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -111,7 +111,7 @@
             <div class="section" itemprop="articleBody">
               
                 <h2 id="pipeline-steps">Pipeline Steps</h2>
-<p><code>write_MSFraggerParams</code> creates a native <code>fragger.params</code> file from <code>params.MSFragger</code> and the decoy prefix. <code>search_database_MSFragger</code> runs the supplied JAR on each mzML with the target-decoy FASTA, producing a PIN file and one or more pepXML files (including <code>_rankN.pepXML</code> files in DIA mode). <code>convert_pepXML2idXML_MSFragger</code> uses <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/2ababb27fe7d45a0bd465d86359f9bca8089d72c/src/PepXMLs2IdXML.py">PepXMLs2IdXML.py</a> and pyOpenMS 3.5.0 to combine the pepXML ranks for each fraction. Each PeptideIdentification records the source mzML as <code>file_origin</code>, its fraction label, MSFragger rank, and source pepXML filename. <code>merge_idXML_MSFragger</code> combines fractions into one protein identification run per sample while preserving those PSM annotations.</p>
+<p><code>write_MSFraggerParams</code> creates a native <code>fragger.params</code> file from <code>params.MSFragger</code> and the decoy prefix. <code>search_database_MSFragger</code> runs the supplied JAR on each mzML with the target-decoy FASTA, producing a PIN file and one or more pepXML files (including <code>_rankN.pepXML</code> files in DIA mode). <code>convert_pepXML2idXML_MSFragger</code> uses <a href="https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/blob/213aa2eeb0c3825fcca0ab2094ab3c22207e365d/src/PepXMLs2IdXML.py">PepXMLs2IdXML.py</a> and pyOpenMS 3.5.0 to combine the pepXML ranks for each fraction. Each PeptideIdentification records the source mzML as <code>file_origin</code>, its fraction label, MSFragger rank, and source pepXML filename. <code>merge_idXML_MSFragger</code> combines fractions into one protein identification run per sample while preserving those PSM annotations.</p>
 <p><code>calculate_SHA512</code> writes a checksum sidecar for every pepXML rank, PIN file, per-fraction idXML, and merged idXML.</p>
               
             </div>

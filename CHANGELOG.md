@@ -5,6 +5,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Use `id_merge_index` as the sole peptide origin annotation and omit redundant pepXML metadata so IDRipper can split fractions.
+
 ## [0.2.1] - 2026-11-09
 
 ### Fixed

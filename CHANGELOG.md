@@ -5,6 +5,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-11-09
+
 ### Added
 
 - Add MSFragger precursor charge range and charge override settings with schema validation and usage guidance.
@@ -36,4 +38,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.1.0]: https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/releases/tag/v0.1.0
 [0.1.1]: https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/compare/v0.1.1-rc.1...v0.1.1
 [0.1.1-rc.1]: https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/compare/v0.1.0...v0.1.1-rc.1
-[unreleased]: https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/compare/v0.1.1...HEAD
+[0.2.0]: https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/compare/v0.1.1...v0.2.0
+[unreleased]: https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/compare/v0.2.0...HEAD

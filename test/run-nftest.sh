@@ -40,4 +40,4 @@ export NFT_TEMP="${TEST_DIR}"
 echo "Test case: ${TEST_CASE}"
 echo "Output and work directory: ${TEST_DIR}"
 
-exec nftest run -c "${REPO_DIR}/nftest.yml" "${TEST_CASE}"
+nftest run -c "${REPO_DIR}/nftest.yml" "${TEST_CASE}"

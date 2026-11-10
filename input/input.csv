@@ -1,3 +1,4 @@
-sample_name,mzML
-sample_01,/absolute/path/to/sample_01.mzML
-sample_02,/absolute/path/to/sample_02.mzML
+sample_name,fraction,mzML
+sample_01,F1,/absolute/path/to/sample_01_fraction_1.mzML
+sample_01,F2,/absolute/path/to/sample_01_fraction_2.mzML
+sample_02,F1,/absolute/path/to/sample_02_fraction_1.mzML

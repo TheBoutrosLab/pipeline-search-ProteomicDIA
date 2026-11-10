@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Add MSFragger precursor charge range and charge override settings with schema validation and usage guidance.
+- Support offline multi-fraction DIA samples with per-fraction searches and a merged sample idXML.
 
 ## [0.1.1] - 2026-10-24
 

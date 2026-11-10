@@ -4,12 +4,12 @@ process calculate_SHA512 {
     label 'process_low'
     ext log_dir: { "${sample_name}/${task.process.replace(':', '/')}/task-${task.index}-attempt-${task.attempt}" }
 
-    publishDir path: "${params.output_dir_base}/output/MSFragger",
+    publishDir path: { "${params.output_dir_base}/output/MSFragger${result_group == 'fraction' ? '/per_fraction' : ''}" },
         mode: 'copy',
         pattern: '*.sha512'
 
     input:
-        tuple val(sample_name), path(result_file)
+        tuple val(sample_name), val(result_group), path(result_file)
 
     output:
         path "${result_file.name}.sha512", emit: checksum

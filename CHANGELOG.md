@@ -5,6 +5,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.2] - 2026-11-10
+
 ### Fixed
 
 - Use `id_merge_index` as the sole peptide origin annotation and omit redundant pepXML metadata so IDRipper can split fractions.
@@ -50,4 +52,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.1.1-rc.1]: https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/compare/v0.1.0...v0.1.1-rc.1
 [0.2.0]: https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/compare/v0.1.1...v0.2.0
 [0.2.1]: https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/compare/v0.2.0...v0.2.1
-[unreleased]: https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/compare/v0.2.1...HEAD
+[0.2.2]: https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/compare/v0.2.1...v0.2.2
+[unreleased]: https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/compare/v0.2.2...HEAD

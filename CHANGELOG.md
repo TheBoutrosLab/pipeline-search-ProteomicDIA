@@ -5,6 +5,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.3] - 2026-11-20
+
 ### Changed
 
 - Migrate the pipeline license from GPL to BSD 3-Clause and update license documentation; shared code and third-party tools retain their respective licenses.
@@ -57,4 +59,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.2.0]: https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/compare/v0.1.1...v0.2.0
 [0.2.1]: https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/compare/v0.2.0...v0.2.1
 [0.2.2]: https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/compare/v0.2.1...v0.2.2
-[unreleased]: https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/compare/v0.2.2...HEAD
+[0.2.3]: https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/compare/v0.2.2...v0.2.3
+[unreleased]: https://github.com/TheBoutrosLab/pipeline-search-ProteomicDIA/compare/v0.2.3...HEAD
